@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Получить сигнал</title>
+    <style>
+        .main {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin: 10em auto;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            background-color: #333333;
+            height: 400px;
+            border-radius: 20px;
+            border: 5px solid #53515198;
+
+        }
+        body {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-size: cover;
+            overflow: hidden;
+            background-image: url(brain_.png);
+            height: 100vh;
+            background-color: rgba(87, 76, 67, 0.603);
+            background-blend-mode: multiply;
+        }
+
+        #gameBoard {
+            margin: 15px auto;
+            display: grid;
+            height: 200px;
+            width: 200px;
+            border: 2px solid #333;
+            border-radius: 15px;
+            align-items: start;
+            background-color: #724716;
+            position: relative;
+            grid-template-columns: repeat(5, auto);
+            place-content: start;
+        }
+        @keyframes ani {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        .selector {
+            display: flex;
+            height: 114px;
+            position: relative;
+            gap: 1em;
+        }
+        .selector button {
+            height: 49px;
+            width: 53px;
+            font-size: 34px;
+            padding: 0;
+            text-align: center;
+            /* margin-top: 0; */
+            border-radius: 17px;
+        }
+        .cell {
+            align-self: start;
+            display: flex;
+            width: 89px;
+            opacity: 0;
+            justify-content: center;
+            align-items: center;
+            height: 89px;
+            overflow: hidden;  /* NEW */
+            min-width: 0;  
+            border: 2px solid #5c3808a2;
+            background-color: #41280c;
+            border-radius: 10px;
+            margin: 6px;
+            cursor: pointer;
+            animation: ani 1.3s forwards;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .getid{
+            z-index: 100;
+            margin: 0 auto;
+            background-color: #808080;
+            padding: 3rem;
+            width: 190px;
+            text-align: center;
+
+            border-radius: 1rem;
+        }
+        .getid p{
+            color: rgb(255, 255, 255);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 30px;
+        }
+        .getid button{
+            background-color: #333;
+        }
+        input{
+            font-size: 15px;
+            padding: 0.3em;
+            text-align: center; 
+            margin: 0 auto;
+       
+
+        }
+        .get{
+            z-index: 100;
+            position: absolute;
+            margin: 0 auto;
+            top: 30%;
+            padding: 3rem;
+            left: 0;
+            text-align: center;
+            right: 0;
+            border-radius: 1rem;
+        }
+        .fon{
+            position: absolute;
+            top: 0; left: 50%;
+            width: 100vw; 
+            margin-left: -50vw;
+            height: 100vh;
+            background-color: rgb(0, 0, 0);
+            opacity: 0.7;
+            z-index: 10;
+
+        }
+        button {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #808080;
+            color: #fff;
+            padding: 17px 24px;
+            border: none;
+            font-size: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 1em;
+        }
+        .pictures{
+            display: flex;
+            
+            margin-top: -1em;
+            margin-bottom: 1em;
+
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+        .crystall{
+            display: flex;
+     
+            margin-top: -5em;
+            gap: 5.6em;
+            z-index: 10;
+        }
+        .crystall img{
+            width: 35px;
+            height: 30px;
+        }
+        img {
+            width: 120px;
+            height: 100px;
+            z-index: 99;
+            
+       
+        }
+        .chance {
+            display: block;
+            position: relative;
+            height: 65px;
+            width: 200px;
+            border-radius: 15px;
+            background-color: rgba(34, 33, 33, 0.733);
+            background-blend-mode: multiply;
+        }
+        #myNumber {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-align: center;
+            font-size: 22px;
+            color: aliceblue;
+        }
+    .some{
+        height: 530px;
+    }
+    .some p{
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;   
+        font-size: 50px;
+        color: rgb(87, 54, 23);
+        height: 530px;
+    }
+    .lov-block{
+        display: flex;
+        gap: 10px;
+    }
+    .lov-block p {
+        margin-top: 1em;
+        margin-bottom: -0.7em;
+        color: white;
+        font-size: 22px;
+    }
+    .hash{
+        display: none;
+    }
+    .getid .errorr{
+        display: flex;
+        opacity: 0;
+        color: red;
+        font-size: 20px;
+    }
+    @keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-60px); }
+    }
+    .animate{
+        animation: mover 1s forwards;
+    }
+    .start{
+        margin-top: 5em;
+    }
+    </style>
+</head>
+<body>
+
+    
+    <div class="main">
+        <!-- <div id="gameBoard">
+            <div class="some">
+                <p>Нажмите на кнопку "Получить сигнал"</p>
+            </div>
+        </div>
+        <div class="lov-block">
+         <p class="txt-lov">Кол-во ловушек: </p><p id="number" class="txt-lov">1</p>   
+        </div>
+        
+        <div class="selector">
+            <button onclick="minus()">-</button><button onclick="plus()">+</button>
+        </div>
+        <div class="chance">
+            <p id="myNumber">Шанс: -</p>
+        </div> -->
+        <div id="hashid" class="hash">
+            <div class="fon">
+
+            </div>
+            <div class="get">
+                <div class="getid">
+                    <p>Hash id</p>
+                    <input id="gethash" placeholder="Введите hash id"/>
+                    <p id="error" class="errorr">Вы не ввели id</p>
+                    <button onclick="accept()">Принять</button>
+                </div>
+            </div>
+
+      
+        </div>
+        <div class="pictures">
+            <img id="pictureone" src="brain.png">
+            <img id="picturetwo" src="brain.png">
+            <img id="picturethree" src="brain.png">
+            
+
+        </div>
+        <div class="crystall">
+            <img id="crystallone" src="crystall.png">
+            <img id="crystall" src="crystall.png">
+            <img id="crystall" src="crystall.png">
+        </div>
+        <button class="start" onclick="show()">Старт</button>
+    </div>
+    
+
+
+
+
+
+<script>
+    function show(){
+        
+        let modal = document.getElementById('hashid')
+        modal.style.display = "flex"
+        let anim = document.querySelectorAll(".animate")[0];
+        anim.className = ''
+        let modal2 = document.getElementById('error')
+        modal2.style.opacity = 0;
+    }   
+    function accept(){
+        
+        let modal = document.getElementById('gethash')
+        console.log(modal)
+        if (modal.value != ""){
+            modal.value = ""
+            let modal3 = document.getElementById('hashid')
+            modal3.style.display = "none"
+            let number = Math.floor(Math.random() * (4 - 1) + 1) 
+            console.log(number)
+            if ( number == 1){
+                let modal4 = document.getElementById('pictureone')
+                modal4.className = "animate"
+            } else if ( number == 2){
+                let modal4 = document.getElementById('picturetwo')
+                modal4.className = "animate"
+            } else if ( number == 3){
+                let modal4 = document.getElementById('picturethree')
+                modal4.className = "animate"
+            }
+        } else {
+            let modal2 = document.getElementById('error')
+            modal2.style.opacity = 1;
+        }
+    }
+
+
+</script>
+
+</body>
+</html>
